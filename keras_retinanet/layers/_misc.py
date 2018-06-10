@@ -27,7 +27,7 @@ class Anchors(keras.layers.Layer):
         self.stride = stride
         self.ratios = ratios
         self.scales = scales
-
+        print("inAnchors init",ratios)
         if ratios is None:
             self.ratios  = np.array([0.5, 1, 2], keras.backend.floatx()),
         elif isinstance(ratios, list):

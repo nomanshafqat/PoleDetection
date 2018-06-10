@@ -15,7 +15,7 @@ limitations under the License.
 """
 
 import numpy as np
-
+import keras
 
 def anchor_targets_bbox(
     image_shape,
@@ -23,7 +23,7 @@ def anchor_targets_bbox(
     num_classes,
     mask_shape=None,
     negative_overlap=0.4,
-    positive_overlap=0.5,
+    positive_overlap=0.45,
     **kwargs
 ):
     anchors = anchors_for_shape(image_shape, **kwargs)
@@ -113,6 +113,7 @@ def anchors_for_shape(
     sizes=None,
     shapes_callback=None,
 ):
+    #print("anchors_for_shape",ratios)
     if pyramid_levels is None:
         pyramid_levels = [3, 4, 5, 6, 7]
     if strides is None:
@@ -120,7 +121,7 @@ def anchors_for_shape(
     if sizes is None:
         sizes = [2 ** (x + 2) for x in pyramid_levels]
     if ratios is None:
-        ratios = np.array([0.5, 1, 2])
+        ratios = np.array([1,2,4,7 ,12, 16, 20])
     if scales is None:
         scales = np.array([2 ** 0, 2 ** (1.0 / 3.0), 2 ** (2.0 / 3.0)])
 
@@ -134,7 +135,6 @@ def anchors_for_shape(
         anchors         = generate_anchors(base_size=sizes[idx], ratios=ratios, scales=scales)
         shifted_anchors = shift(image_shapes[idx], strides[idx], anchors)
         all_anchors     = np.append(all_anchors, shifted_anchors, axis=0)
-
     return all_anchors
 
 
@@ -166,13 +166,6 @@ def generate_anchors(base_size=16, ratios=None, scales=None):
     Generate anchor (reference) windows by enumerating aspect ratios X
     scales w.r.t. a reference window.
     """
-
-    if ratios is None:
-        ratios = np.array([0.5, 1, 2])
-
-    if scales is None:
-        scales = np.array([2 ** 0, 2 ** (1.0 / 3.0), 2 ** (2.0 / 3.0)])
-
     num_anchors = len(ratios) * len(scales)
 
     # initialize output anchors

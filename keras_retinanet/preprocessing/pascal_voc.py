@@ -49,6 +49,10 @@ voc_classes = {
     'train'       : 18,
     'tvmonitor'   : 19
 }
+voc_classes = {
+    'khamba'   : 0,
+
+}
 
 
 def _findNode(parent, name, debug_name = None, parse = None):
@@ -73,8 +77,8 @@ class PascalVocGenerator(Generator):
         set_name,
         classes=voc_classes,
         image_extension='.jpg',
-        skip_truncated=False,
-        skip_difficult=False,
+        skip_truncated=True,
+        skip_difficult=True,
         **kwargs
     ):
         self.data_dir             = data_dir
@@ -113,8 +117,8 @@ class PascalVocGenerator(Generator):
         return read_image_bgr(path)
 
     def __parse_annotation(self, element):
-        truncated = _findNode(element, 'truncated', parse=int)
-        difficult = _findNode(element, 'difficult', parse=int)
+        truncated = 0
+        difficult = 0
 
         class_name = _findNode(element, 'name').text
         if class_name not in self.classes:

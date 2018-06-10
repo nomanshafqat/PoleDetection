@@ -388,6 +388,11 @@ def main(args=None):
     # create the generators
     train_generator, validation_generator = create_generators(args)
 
+    data=next(train_generator)
+    #print("generator:",data[0].shape)
+    #print("generator:",data[1][0].shape)
+    #print("generator:",data[1][0].shape)
+
     # create the model
     if args.snapshot is not None:
         print('Loading model, this may take a second...')
