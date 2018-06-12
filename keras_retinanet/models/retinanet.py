@@ -177,8 +177,8 @@ The default anchor parameters.
 AnchorParameters.default = AnchorParameters(
     sizes   = [32, 64, 128, 256, 512],
     strides = [8, 16, 32, 64, 128],
-    ratios  = np.array([1,2,4,7 ,12, 16, 20], keras.backend.floatx()),
-    scales  = np.array([2 ** 0, 2 ** (1.0 / 3.0), 2 ** (2.0 / 3.0)], keras.backend.floatx()),
+    ratios  = np.array([4,16,32], keras.backend.floatx()),
+    scales  = np.array([2,4,8], keras.backend.floatx()),
 )
 
 
@@ -259,7 +259,7 @@ def retinanet(
     inputs,
     backbone_layers,
     num_classes,
-    num_anchors             = 21,
+    num_anchors             = 9,
     create_pyramid_features = __create_pyramid_features,
     submodels               = None,
     name                    = 'retinanet'

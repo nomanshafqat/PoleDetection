@@ -23,7 +23,7 @@ def anchor_targets_bbox(
     num_classes,
     mask_shape=None,
     negative_overlap=0.4,
-    positive_overlap=0.45,
+    positive_overlap=0.5,
     **kwargs
 ):
     anchors = anchors_for_shape(image_shape, **kwargs)
@@ -115,15 +115,15 @@ def anchors_for_shape(
 ):
     #print("anchors_for_shape",ratios)
     if pyramid_levels is None:
-        pyramid_levels = [3, 4, 5, 6, 7]
+        pyramid_levels = [3,4,5,6,7]
     if strides is None:
         strides = [2 ** x for x in pyramid_levels]
     if sizes is None:
         sizes = [2 ** (x + 2) for x in pyramid_levels]
     if ratios is None:
-        ratios = np.array([1,2,4,7 ,12, 16, 20])
+        ratios = np.array([4,16,32])
     if scales is None:
-        scales = np.array([2 ** 0, 2 ** (1.0 / 3.0), 2 ** (2.0 / 3.0)])
+        scales = np.array([2,4,8])
 
     if shapes_callback is None:
         shapes_callback = guess_shapes

@@ -132,7 +132,7 @@ class PascalVocGenerator(Generator):
         box[0, 1] = _findNode(bndbox, 'ymin', 'bndbox.ymin', parse=float) - 1
         box[0, 2] = _findNode(bndbox, 'xmax', 'bndbox.xmax', parse=float) - 1
         box[0, 3] = _findNode(bndbox, 'ymax', 'bndbox.ymax', parse=float) - 1
-
+        #print((box[0, 3]-box[0, 1])/(box[0, 2]-box[0, 0]))
         return truncated, difficult, box
 
     def __parse_annotations(self, xml_root):

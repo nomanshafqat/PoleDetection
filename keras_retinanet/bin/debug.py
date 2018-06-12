@@ -46,10 +46,10 @@ def create_generator(args):
         max_translation=(0.1, 0.1),
         min_shear=-0.1,
         max_shear=0.1,
-        min_scaling=(0.9, 0.9),
-        max_scaling=(1.1, 1.1),
+        min_scaling=(0.8, 0.8),
+        max_scaling=(1.2, 1.2),
         flip_x_chance=0.5,
-        flip_y_chance=0.5,
+        flip_y_chance=0.0,
     )
 
     if args.dataset_type == 'coco':
